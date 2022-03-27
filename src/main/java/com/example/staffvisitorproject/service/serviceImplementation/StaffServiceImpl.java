@@ -28,12 +28,12 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Staff getStaff(Long id) {
-        return null;
+        return staffRepository.getById(id);
     }
 
     @Override
     public List<Staff> getStaffList() {
-        return null;
+        return staffRepository.findAll();
     }
 
     @Override

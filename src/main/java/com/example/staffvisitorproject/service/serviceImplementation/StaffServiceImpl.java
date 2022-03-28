@@ -7,19 +7,16 @@ import com.example.staffvisitorproject.repository.StaffRepository;
 import com.example.staffvisitorproject.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
 @Service
 public class StaffServiceImpl implements StaffService {
     private final StaffRepository staffRepository;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public StaffServiceImpl(StaffRepository staffRepository, ModelMapper modelMapper) {
+    public StaffServiceImpl(StaffRepository staffRepository) {
         this.staffRepository = staffRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -45,8 +42,15 @@ public class StaffServiceImpl implements StaffService {
         final Staff staff = staffRepository.findByEmailAddress(staffDetails.getEmail()).orElse(null);
 
         if (staff.equals(null)) {
-            final Staff newStaff = staffRepository.save(modelMapper.map(staffDetails, Staff.class));
-            return newStaff;
+            Staff newStaff = new Staff();
+            newStaff.setFullName(staffDetails.getName());
+            newStaff.setEmailAddress(staffDetails.getEmail());
+            newStaff.setHomeAddress(staffDetails.getAddress());
+            newStaff.setPhoneNumber(staffDetails.getPhoneNumber());
+            newStaff.setUsername(staffDetails.getUsername());
+            newStaff.setPassword(staffDetails.getPassword());
+
+            return staffRepository.save(newStaff);
         }
         return null;
     }

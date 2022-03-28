@@ -29,10 +29,8 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public Visitor saveVisitor(VisitorRegDTO request) {
-        final Visitor visitor = visitorRepository.findByEmailAddress(request.getEmail()).orElseThrow(
-                () -> new IllegalArgumentException("Visitor already exists in database")
-        );
-        if (visitor.equals(null)) {
+        final Visitor visitor = visitorRepository.findByEmailAddress(request.getEmail()).orElse(null);
+        if (visitor == null) {
             Visitor newVisitor = new Visitor();
             newVisitor.setFullName(request.getFullName());
             newVisitor.setEmailAddress(request.getEmail());
@@ -51,13 +49,13 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public Visitor getVisitor(Long id) {
-        return visitorRepository.getById(id);
+        return visitorRepository.findById(id).orElse(null);
     }
 
     @Override
     public VisitLog addVisit(VisitLogDTO request) {
-        final Staff staff = staffRepository.getById(request.getStaffId());
-        final Visitor visitor = visitorRepository.getById(request.getVisitorId());
+        final Staff staff = staffRepository.findById(request.getStaffId()).orElse(null);
+        final Visitor visitor = visitorRepository.findById(request.getVisitorId()).orElse(null);
 
         if (staff != null && visitor != null) {
             VisitLog log = new VisitLog();

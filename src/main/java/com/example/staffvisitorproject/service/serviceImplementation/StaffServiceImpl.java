@@ -29,7 +29,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Staff getStaff(Long id) {
-        return staffRepository.getById(id);
+        return staffRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class StaffServiceImpl implements StaffService {
     public Staff addStaff(StaffRegDTO staffDetails) {
         final Staff staff = staffRepository.findByEmailAddress(staffDetails.getEmail()).orElse(null);
 
-        if (staff.equals(null)) {
+        if (staff == null) {
             Staff newStaff = new Staff();
             newStaff.setFullName(staffDetails.getName());
             newStaff.setEmailAddress(staffDetails.getEmail());

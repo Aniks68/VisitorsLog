@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface VisitorRepository extends JpaRepository<Visitor, Long> {
     Optional<Visitor> findByEmailAddress(String email);
-
+    Optional<Visitor> findById(Long id);
 }

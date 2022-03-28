@@ -22,7 +22,8 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public String loginUser(String username, String password) {
+    public String loginUser(LoginRequest request) {
+        staffRepository.findByUsernameAndPassword()
         return null;
     }
 

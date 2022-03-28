@@ -1,5 +1,6 @@
 package com.example.staffvisitorproject.service.serviceImplementation;
 
+import com.example.staffvisitorproject.dto.LoginRequest;
 import com.example.staffvisitorproject.dto.StaffRegDTO;
 import com.example.staffvisitorproject.model.Staff;
 import com.example.staffvisitorproject.repository.StaffRepository;
@@ -23,8 +24,10 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public String loginUser(LoginRequest request) {
-        staffRepository.findByUsernameAndPassword()
-        return null;
+        final Staff validUser = staffRepository.findByUsernameAndPassword(request.getUsername(), request.getPassword()).orElseThrow(
+                () -> new IllegalArgumentException("Incorrect username or password")
+        );
+        return (validUser != null) ? "Logged in successfully" : "Incorrect login details";
     }
 
     @Override

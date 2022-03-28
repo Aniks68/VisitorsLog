@@ -1,5 +1,6 @@
 package com.example.staffvisitorproject.controller;
 
+import com.example.staffvisitorproject.dto.LoginRequest;
 import com.example.staffvisitorproject.dto.StaffRegDTO;
 import com.example.staffvisitorproject.model.Staff;
 import com.example.staffvisitorproject.service.StaffService;
@@ -28,5 +29,10 @@ public class StaffController {
     @GetMapping("/staff/{id}")
     public ResponseEntity<Staff> getStaff (@PathVariable(value="id") Long id) {
         return ResponseEntity.ok().body(staffService.getStaff(id));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok().body(staffService.loginUser(request));
     }
 }

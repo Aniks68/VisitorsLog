@@ -2,7 +2,7 @@ package com.example.staffvisitorproject.service;
 
 import com.example.staffvisitorproject.dto.StaffRegDTO;
 import com.example.staffvisitorproject.model.Staff;
-import com.example.staffvisitorproject.service.serviceImplementation.LoginRequest;
+import com.example.staffvisitorproject.dto.LoginRequest;
 
 import java.util.List;
 

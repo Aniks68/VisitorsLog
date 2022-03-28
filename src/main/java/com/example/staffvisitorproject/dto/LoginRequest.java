@@ -1,4 +1,4 @@
-package com.example.staffvisitorproject.service.serviceImplementation;
+package com.example.staffvisitorproject.dto;
 
 import lombok.Data;
 
